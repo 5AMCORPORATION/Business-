@@ -1,1 +1,5240 @@
-bzxc
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#f5f5f7">
+    <meta
+        name="description"
+        content="Presencia digital profesional para empresas, negocios y emprendimientos."
+    >
+
+    <title>NOVA — Presencia digital profesional</title>
+
+    <style>
+        /* =========================================================
+           01. VARIABLES
+        ========================================================= */
+
+        :root {
+            --bg: #f5f5f7;
+            --bg-secondary: #ffffff;
+            --surface: rgba(255,255,255,.72);
+            --surface-solid: #ffffff;
+
+            --text: #111111;
+            --text-secondary: #626262;
+            --text-muted: #888888;
+
+            --border: rgba(0,0,0,.09);
+            --border-strong: rgba(0,0,0,.15);
+
+            --accent: #0071e3;
+            --accent-dark: #005bb5;
+            --accent-soft: rgba(0,113,227,.10);
+
+            --success: #1d8f55;
+            --danger: #d93025;
+
+            --shadow-sm:
+                0 4px 20px rgba(0,0,0,.06);
+
+            --shadow:
+                0 20px 60px rgba(0,0,0,.09);
+
+            --shadow-lg:
+                0 35px 100px rgba(0,0,0,.14);
+
+            --radius-sm: 14px;
+            --radius: 22px;
+            --radius-lg: 32px;
+
+            --container: 1180px;
+
+            --transition:
+                280ms cubic-bezier(.22,1,.36,1);
+        }
+
+        /* =========================================================
+           02. RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-width: 0;
+            overflow-x: hidden;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "SF Pro Display",
+                "SF Pro Text",
+                "Helvetica Neue",
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 50% -15%,
+                    rgba(255,255,255,.95),
+                    transparent 45%
+                ),
+                var(--bg);
+
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* =========================================================
+           03. UTILIDADES
+        ========================================================= */
+
+        .container {
+            width: min(
+                calc(100% - 40px),
+                var(--container)
+            );
+
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: 110px 0;
+            position: relative;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 18px;
+
+            color: var(--accent);
+
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .section-label::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 16px var(--accent);
+        }
+
+        .section-title {
+            max-width: 760px;
+
+            font-size:
+                clamp(38px, 5vw, 68px);
+
+            line-height: .98;
+            letter-spacing: -.055em;
+            font-weight: 700;
+        }
+
+        .section-description {
+            max-width: 650px;
+            margin-top: 24px;
+
+            color: var(--text-secondary);
+
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition:
+                opacity .75s ease,
+                transform .75s cubic-bezier(.22,1,.36,1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+           04. HEADER
+        ========================================================= */
+
+        header {
+            position: fixed;
+            z-index: 1000;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            padding:
+                max(14px, env(safe-area-inset-top))
+                0
+                14px;
+
+            transition: var(--transition);
+        }
+
+        header.scrolled .nav {
+            background: rgba(255,255,255,.78);
+            border-color: rgba(0,0,0,.12);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(22px) saturate(180%);
+        }
+
+        .nav {
+            width: min(
+                calc(100% - 28px),
+                1160px
+            );
+
+            height: 62px;
+
+            margin: 0 auto;
+
+            padding: 0 10px 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border: 1px solid transparent;
+            border-radius: 999px;
+
+            transition: var(--transition);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+
+            min-width: 0;
+
+            font-weight: 750;
+            letter-spacing: -.03em;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 auto;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #202020,
+                    #000
+                );
+
+            color: white;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.15),
+                0 6px 16px rgba(0,0,0,.18);
+        }
+
+        .brand-logo span {
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            padding: 10px 13px;
+
+            color: #505050;
+
+            border-radius: 999px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: rgba(0,0,0,.055);
+        }
+
+        .nav-cta {
+            margin-left: 8px;
+
+            padding: 11px 17px;
+
+            border-radius: 999px;
+
+            background: var(--text);
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            box-shadow:
+                0 7px 18px rgba(0,0,0,.14);
+
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                0 10px 25px rgba(0,0,0,.18);
+        }
+
+        .menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: rgba(0,0,0,.06);
+        }
+
+        .menu-button span {
+            display: block;
+
+            width: 17px;
+            height: 2px;
+
+            margin: 4px auto;
+
+            border-radius: 5px;
+
+            background: var(--text);
+
+            transition: var(--transition);
+        }
+
+        /* =========================================================
+           05. HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100svh;
+
+            display: flex;
+            align-items: center;
+
+            padding:
+                150px 0
+                90px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            top: -260px;
+            right: -220px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    var(--accent-soft),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.02fr .98fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 8px 13px;
+
+            margin-bottom: 25px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.65);
+
+            color: var(--text-secondary);
+
+            font-size: 12px;
+            font-weight: 650;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            box-shadow:
+                0 0 15px var(--accent);
+        }
+
+        .hero h1 {
+            max-width: 800px;
+
+            font-size:
+                clamp(50px, 7vw, 92px);
+
+            line-height: .91;
+            letter-spacing: -.065em;
+
+            font-weight: 750;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-text {
+            max-width: 610px;
+
+            margin-top: 29px;
+
+            color: var(--text-secondary);
+
+            font-size:
+                clamp(17px, 2vw, 21px);
+
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            margin-top: 36px;
+        }
+
+        .button {
+            min-height: 52px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            padding: 0 21px;
+
+            border-radius: 999px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: var(--transition);
+
+            white-space: nowrap;
+        }
+
+        .button-primary {
+            background: var(--text);
+            color: white;
+
+            box-shadow:
+                0 12px 28px rgba(0,0,0,.16);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 17px 35px rgba(0,0,0,.20);
+        }
+
+        .button-secondary {
+            background: rgba(255,255,255,.65);
+
+            border: 1px solid var(--border);
+
+            color: var(--text);
+
+            backdrop-filter: blur(14px);
+        }
+
+        .button-secondary:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-proof {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+
+            margin-top: 35px;
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+        }
+
+        .hero-proof span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .hero-proof span::before {
+            content: "✓";
+
+            width: 18px;
+            height: 18px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: var(--accent-soft);
+            color: var(--accent);
+
+            font-weight: 800;
+        }
+
+        /* Hero visual */
+
+        .hero-visual {
+            position: relative;
+
+            min-height: 570px;
+
+            display: grid;
+            place-items: center;
+        }
+
+        .visual-glow {
+            position: absolute;
+
+            width: 370px;
+            height: 370px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    var(--accent-soft),
+                    transparent 70%
+                );
+
+            filter: blur(8px);
+        }
+
+        .hero-card {
+            position: relative;
+
+            width: min(480px, 90%);
+
+            aspect-ratio: 1 / 1.12;
+
+            padding: 26px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(255,255,255,.7);
+            border-radius: 38px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #191919,
+                    #050505 65%,
+                    #181818
+                );
+
+            color: white;
+
+            box-shadow:
+                0 50px 100px rgba(0,0,0,.24),
+                inset 0 1px 0 rgba(255,255,255,.15);
+
+            transform:
+                perspective(1000px)
+                rotateY(-7deg)
+                rotateX(3deg);
+
+            transition:
+                transform .8s cubic-bezier(.22,1,.36,1);
+        }
+
+        .hero-card:hover {
+            transform:
+                perspective(1000px)
+                rotateY(-2deg)
+                rotateX(1deg)
+                translateY(-7px);
+        }
+
+        .hero-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            right: -80px;
+            top: -80px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,.16),
+                    transparent 65%
+                );
+        }
+
+        .hero-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-card-brand {
+            font-size: 14px;
+            font-weight: 750;
+            letter-spacing: .04em;
+        }
+
+        .hero-card-tag {
+            padding: 7px 10px;
+
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.06);
+
+            font-size: 10px;
+            color: rgba(255,255,255,.7);
+        }
+
+        .hero-card-center {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-card-center h3 {
+            max-width: 360px;
+
+            font-size:
+                clamp(34px, 5vw, 54px);
+
+            line-height: .95;
+            letter-spacing: -.055em;
+        }
+
+        .hero-card-center p {
+            max-width: 300px;
+
+            margin-top: 15px;
+
+            color: rgba(255,255,255,.56);
+
+            font-size: 13px;
+        }
+
+        .hero-card-bottom {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .hero-card-number {
+            color: rgba(255,255,255,.35);
+
+            font-size: 11px;
+            letter-spacing: .1em;
+        }
+
+        .hero-card-icon {
+            width: 48px;
+            height: 48px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 16px;
+
+            background: rgba(255,255,255,.07);
+
+            font-size: 20px;
+        }
+
+        /* =========================================================
+           06. TRUST BAR
+        ========================================================= */
+
+        .trust-bar {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(255,255,255,.45);
+        }
+
+        .trust-inner {
+            min-height: 86px;
+
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+
+            align-items: center;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .trust-icon {
+            width: 31px;
+            height: 31px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+
+            color: var(--accent);
+        }
+
+        /* =========================================================
+           07. SERVICES
+        ========================================================= */
+
+        .section-header-row {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 48px;
+        }
+
+        .section-header-row .section-description {
+            margin-top: 0;
+            max-width: 430px;
+        }
+
+        .services-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0,1fr));
+
+            gap: 17px;
+        }
+
+        .service-card {
+            position: relative;
+
+            min-width: 0;
+
+            padding: 27px;
+
+            min-height: 300px;
+
+            display: flex;
+            flex-direction: column;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background:
+                rgba(255,255,255,.68);
+
+            box-shadow: var(--shadow-sm);
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(0,113,227,.22);
+
+            box-shadow: var(--shadow);
+        }
+
+        .service-card.selected {
+            border-color:
+                rgba(0,113,227,.4);
+
+            box-shadow:
+                0 20px 60px rgba(0,113,227,.10);
+        }
+
+        .service-icon {
+            width: 51px;
+            height: 51px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 30px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    white,
+                    #ededed
+                );
+
+            box-shadow:
+                inset 0 1px 0 white,
+                0 8px 22px rgba(0,0,0,.08);
+
+            color: var(--accent);
+
+            font-size: 21px;
+        }
+
+        .service-card h3 {
+            font-size: 21px;
+            letter-spacing: -.025em;
+        }
+
+        .service-card p {
+            margin-top: 10px;
+
+            color: var(--text-secondary);
+
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .service-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-top: auto;
+            padding-top: 25px;
+        }
+
+        .service-price {
+            color: var(--text);
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .service-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            color: var(--accent);
+
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        /* =========================================================
+           08. SELECTED SERVICE PANEL
+        ========================================================= */
+
+        .selection-panel {
+            max-height: 0;
+
+            margin-top: 0;
+
+            overflow: hidden;
+
+            opacity: 0;
+
+            transition:
+                max-height .7s cubic-bezier(.22,1,.36,1),
+                margin .7s cubic-bezier(.22,1,.36,1),
+                opacity .35s ease;
+        }
+
+        .selection-panel.active {
+            max-height: 800px;
+            margin-top: 28px;
+            opacity: 1;
+        }
+
+        .selection-inner {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 25px;
+
+            padding: 28px;
+
+            border: 1px solid rgba(0,113,227,.18);
+            border-radius: var(--radius-lg);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.9),
+                    rgba(245,248,252,.9)
+                );
+
+            box-shadow:
+                0 20px 70px rgba(0,0,0,.07);
+        }
+
+        .selection-image {
+            min-height: 330px;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ddd,
+                    #aaa
+                );
+        }
+
+        .selection-image img {
+            height: 100%;
+        }
+
+        .selection-content {
+            padding: 15px 10px;
+        }
+
+        .selection-content h3 {
+            font-size:
+                clamp(28px, 4vw, 43px);
+
+            line-height: 1;
+
+            letter-spacing: -.045em;
+        }
+
+        .selection-content > p {
+            margin-top: 17px;
+
+            color: var(--text-secondary);
+
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 10px;
+
+            margin-top: 23px;
+        }
+
+        .feature-list li {
+            display: flex;
+            gap: 10px;
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+
+            flex: 0 0 auto;
+
+            color: var(--accent);
+
+            font-weight: 800;
+        }
+
+        .selection-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 28px;
+            padding-top: 20px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .selection-price {
+            font-size: 18px;
+            font-weight: 750;
+        }
+
+        .selection-price small {
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        /* =========================================================
+           09. WHY US
+        ========================================================= */
+
+        .why-section {
+            background: #0b0b0b;
+            color: white;
+        }
+
+        .why-section .section-label {
+            color: #74aef4;
+        }
+
+        .why-section .section-label::before {
+            background: #74aef4;
+        }
+
+        .why-section .section-description {
+            color: rgba(255,255,255,.56);
+        }
+
+        .why-grid {
+            display: grid;
+
+            grid-template-columns:
+                .9fr 1.1fr;
+
+            gap: 90px;
+
+            align-items: center;
+        }
+
+        .why-title {
+            max-width: 600px;
+
+            font-size:
+                clamp(42px, 5vw, 70px);
+
+            line-height: .96;
+
+            letter-spacing: -.055em;
+        }
+
+        .why-title span {
+            color: #8fbdf5;
+        }
+
+        .why-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0,1fr));
+
+            gap: 13px;
+        }
+
+        .why-card {
+            min-height: 175px;
+
+            padding: 23px;
+
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.07),
+                    rgba(255,255,255,.025)
+                );
+
+            transition: var(--transition);
+        }
+
+        .why-card:hover {
+            transform: translateY(-4px);
+
+            border-color:
+                rgba(255,255,255,.18);
+
+            background:
+                rgba(255,255,255,.08);
+        }
+
+        .why-card-icon {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .why-card h3 {
+            font-size: 16px;
+        }
+
+        .why-card p {
+            margin-top: 8px;
+
+            color: rgba(255,255,255,.48);
+
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           10. ABOUT
+        ========================================================= */
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+        .about-visual {
+            min-height: 510px;
+
+            position: relative;
+
+            border-radius: 35px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #dedede,
+                    #f9f9f9
+                );
+
+            box-shadow: var(--shadow);
+        }
+
+        .about-visual::before {
+            content: "EMPRESA";
+
+            position: absolute;
+
+            left: 28px;
+            top: 25px;
+
+            z-index: 2;
+
+            padding: 7px 11px;
+
+            border: 1px solid rgba(255,255,255,.55);
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.35);
+
+            backdrop-filter: blur(12px);
+
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .12em;
+        }
+
+        .about-visual::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent 45%,
+                    rgba(0,0,0,.22)
+                );
+        }
+
+        .about-visual-content {
+            position: absolute;
+
+            z-index: 3;
+
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+
+            color: white;
+        }
+
+        .about-visual-content span {
+            font-size: 11px;
+            color: rgba(255,255,255,.7);
+        }
+
+        .about-visual-content h3 {
+            margin-top: 7px;
+
+            font-size: 32px;
+            line-height: 1;
+
+            letter-spacing: -.04em;
+        }
+
+        .about-copy h2 {
+            max-width: 600px;
+
+            font-size:
+                clamp(38px, 5vw, 62px);
+
+            line-height: .98;
+
+            letter-spacing: -.055em;
+        }
+
+        .about-copy p {
+            margin-top: 23px;
+
+            color: var(--text-secondary);
+
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .about-points {
+            display: grid;
+            gap: 12px;
+
+            margin-top: 28px;
+        }
+
+        .about-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .about-point-icon {
+            width: 27px;
+            height: 27px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 auto;
+
+            border-radius: 9px;
+
+            background: var(--accent-soft);
+            color: var(--accent);
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .about-point strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+        .about-point span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           11. PROCESS
+        ========================================================= */
+
+        .process-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0,1fr));
+
+            gap: 13px;
+
+            margin-top: 55px;
+        }
+
+        .process-card {
+            position: relative;
+
+            padding: 27px;
+
+            min-height: 220px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: var(--transition);
+        }
+
+        .process-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .process-number {
+            display: inline-flex;
+
+            width: 37px;
+            height: 37px;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: var(--text);
+            color: white;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .process-card h3 {
+            margin-top: 33px;
+
+            font-size: 17px;
+        }
+
+        .process-card p {
+            margin-top: 9px;
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           12. PORTFOLIO
+        ========================================================= */
+
+        .portfolio-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0,1fr));
+
+            gap: 17px;
+
+            margin-top: 48px;
+        }
+
+        .portfolio-card {
+            position: relative;
+
+            min-height: 390px;
+
+            border-radius: 27px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            background: #ddd;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .portfolio-card img {
+            height: 100%;
+
+            transition:
+                transform .8s cubic-bezier(.22,1,.36,1);
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.045);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.75),
+                    rgba(0,0,0,.05) 65%
+                );
+
+            color: white;
+        }
+
+        .portfolio-category {
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .12em;
+
+            color: rgba(255,255,255,.62);
+        }
+
+        .portfolio-overlay h3 {
+            margin-top: 7px;
+
+            font-size: 25px;
+            letter-spacing: -.035em;
+        }
+
+        .portfolio-overlay p {
+            margin-top: 5px;
+
+            color: rgba(255,255,255,.66);
+
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           13. TESTIMONIALS
+        ========================================================= */
+
+        .testimonial-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0,1fr));
+
+            gap: 15px;
+
+            margin-top: 48px;
+        }
+
+        .testimonial {
+            padding: 27px;
+
+            border: 1px solid var(--border);
+            border-radius: 23px;
+
+            background: rgba(255,255,255,.7);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stars {
+            color: #d69c00;
+
+            letter-spacing: 2px;
+
+            font-size: 12px;
+        }
+
+        .testimonial blockquote {
+            margin-top: 20px;
+
+            color: #303030;
+
+            font-size: 16px;
+            line-height: 1.65;
+        }
+
+        .testimonial-user {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            margin-top: 25px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: #e8e8e8;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .testimonial-user strong {
+            display: block;
+
+            font-size: 12px;
+        }
+
+        .testimonial-user span {
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           14. CONTACT
+        ========================================================= */
+
+        .contact-section {
+            padding-bottom: 50px;
+        }
+
+        .contact-box {
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns:
+                1.1fr .9fr;
+
+            gap: 50px;
+
+            padding: 55px;
+
+            overflow: hidden;
+
+            border-radius: 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #171717,
+                    #050505
+                );
+
+            color: white;
+
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-box::after {
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            top: -250px;
+            right: -100px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0,113,227,.32),
+                    transparent 65%
+                );
+
+            pointer-events: none;
+        }
+
+        .contact-box > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-box h2 {
+            max-width: 650px;
+
+            font-size:
+                clamp(40px, 5vw, 68px);
+
+            line-height: .96;
+
+            letter-spacing: -.055em;
+        }
+
+        .contact-box p {
+            max-width: 570px;
+
+            margin-top: 20px;
+
+            color: rgba(255,255,255,.55);
+
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 31px;
+        }
+
+        .contact-box .button-primary {
+            background: white;
+            color: #111;
+        }
+
+        .contact-box .button-secondary {
+            border-color: rgba(255,255,255,.15);
+            background: rgba(255,255,255,.07);
+            color: white;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 10px;
+
+            align-content: center;
+        }
+
+        .contact-item {
+            padding: 18px;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 17px;
+
+            background: rgba(255,255,255,.045);
+        }
+
+        .contact-item small {
+            display: block;
+
+            color: rgba(255,255,255,.4);
+
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+
+        .contact-item strong {
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           15. FOOTER
+        ========================================================= */
+
+        footer {
+            padding:
+                35px 0
+                calc(35px + env(safe-area-inset-bottom));
+        }
+
+        .footer-inner {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        /* =========================================================
+           16. WHATSAPP FLOAT
+        ========================================================= */
+
+        .whatsapp-float {
+            position: fixed;
+
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 800;
+
+            width: 55px;
+            height: 55px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: #111;
+            color: white;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.22);
+
+            font-size: 21px;
+
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        /* =========================================================
+           17. MODAL GENERAL
+        ========================================================= */
+
+        .modal {
+            position: fixed;
+
+            z-index: 2000;
+
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0,0,0,.42);
+
+            backdrop-filter: blur(16px);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity .3s ease,
+                visibility .3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            width: min(700px, 100%);
+            max-height: min(850px, 90svh);
+
+            overflow-y: auto;
+
+            border: 1px solid rgba(255,255,255,.65);
+            border-radius: 28px;
+
+            background:
+                rgba(255,255,255,.92);
+
+            box-shadow: var(--shadow-lg);
+
+            transform: translateY(18px) scale(.98);
+
+            transition:
+                transform .45s cubic-bezier(.22,1,.36,1);
+        }
+
+        .modal.active .modal-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-head {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 19px 22px;
+
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(255,255,255,.85);
+
+            backdrop-filter: blur(18px);
+        }
+
+        .modal-head h3 {
+            font-size: 15px;
+        }
+
+        .close-modal {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: rgba(0,0,0,.06);
+
+            font-size: 18px;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        /* =========================================================
+           18. REQUEST FORM
+        ========================================================= */
+
+        .request-summary {
+            padding: 18px;
+
+            margin-bottom: 22px;
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            background: #f7f7f7;
+        }
+
+        .request-summary small {
+            color: var(--text-muted);
+
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+
+        .request-summary strong {
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 17px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0,1fr));
+
+            gap: 14px;
+        }
+
+        .form-field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .form-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-field label {
+            color: #555;
+
+            font-size: 11px;
+            font-weight: 650;
+        }
+
+        .form-field input,
+        .form-field textarea,
+        .form-field select {
+            width: 100%;
+
+            min-height: 48px;
+
+            padding: 0 14px;
+
+            border: 1px solid var(--border-strong);
+            border-radius: 13px;
+
+            outline: none;
+
+            background: white;
+
+            color: var(--text);
+
+            font-size: 14px;
+
+            transition: var(--transition);
+        }
+
+        .form-field textarea {
+            padding-top: 13px;
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus,
+        .form-field select:focus {
+            border-color: var(--accent);
+
+            box-shadow:
+                0 0 0 4px var(--accent-soft);
+        }
+
+        .form-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 23px;
+        }
+
+        .form-note {
+            color: var(--text-muted);
+
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           19. TICKET
+        ========================================================= */
+
+        .ticket {
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            background: white;
+        }
+
+        .ticket-head {
+            padding: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111,
+                    #242424
+                );
+
+            color: white;
+        }
+
+        .ticket-head small {
+            color: rgba(255,255,255,.45);
+
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: .13em;
+        }
+
+        .ticket-head h3 {
+            margin-top: 6px;
+
+            font-size: 23px;
+        }
+
+        .ticket-id {
+            margin-top: 10px;
+
+            color: rgba(255,255,255,.5);
+
+            font-size: 10px;
+        }
+
+        .ticket-body {
+            padding: 22px;
+        }
+
+        .ticket-row {
+            display: grid;
+
+            grid-template-columns:
+                110px 1fr;
+
+            gap: 15px;
+
+            padding: 11px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ticket-row:last-child {
+            border-bottom: 0;
+        }
+
+        .ticket-row span {
+            color: var(--text-muted);
+
+            font-size: 11px;
+        }
+
+        .ticket-row strong {
+            font-size: 12px;
+
+            word-break: break-word;
+        }
+
+        .ticket-warning {
+            margin-top: 17px;
+            padding: 13px;
+
+            border-radius: 13px;
+
+            background: #fff8e6;
+
+            color: #775d16;
+
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           20. PORTFOLIO MODAL
+        ========================================================= */
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background: #ddd;
+        }
+
+        .project-image img {
+            height: 100%;
+        }
+
+        .project-info h3 {
+            margin-top: 23px;
+
+            font-size: 30px;
+
+            letter-spacing: -.04em;
+        }
+
+        .project-info p {
+            margin-top: 11px;
+
+            color: var(--text-secondary);
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .project-tag {
+            display: inline-flex;
+
+            margin-top: 17px;
+            padding: 7px 10px;
+
+            border-radius: 999px;
+
+            background: var(--accent-soft);
+
+            color: var(--accent);
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           21. RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 980px) {
+
+            .hero-grid,
+            .why-grid,
+            .about-grid,
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 135px;
+            }
+
+            .hero-visual {
+                min-height: 470px;
+            }
+
+            .hero-card {
+                width: min(460px, 90%);
+            }
+
+            .services-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+            }
+
+            .portfolio-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+            }
+
+            .testimonial-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+            }
+
+            .process-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+            }
+
+            .contact-box {
+                padding: 40px;
+            }
+
+            .contact-info {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            .container {
+                width: min(
+                    calc(100% - 28px),
+                    var(--container)
+                );
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .nav {
+                width: calc(100% - 18px);
+                padding-left: 14px;
+                padding-right: 8px;
+            }
+
+            .nav-links {
+                position: fixed;
+
+                top: 84px;
+                left: 9px;
+                right: 9px;
+
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+
+                padding: 9px;
+
+                border: 1px solid var(--border);
+                border-radius: 22px;
+
+                background:
+                    rgba(255,255,255,.9);
+
+                box-shadow: var(--shadow);
+
+                backdrop-filter: blur(22px);
+
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+
+                transition: var(--transition);
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                padding: 13px 15px;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .hero {
+                min-height: auto;
+
+                padding:
+                    130px 0
+                    65px;
+            }
+
+            .hero-grid {
+                gap: 45px;
+            }
+
+            .hero h1 {
+                font-size:
+                    clamp(48px, 14vw, 72px);
+            }
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .hero-proof {
+                gap: 11px 17px;
+            }
+
+            .hero-visual {
+                min-height: 390px;
+            }
+
+            .hero-card {
+                width: min(380px, 88vw);
+
+                border-radius: 30px;
+
+                transform: none;
+            }
+
+            .hero-card:hover {
+                transform: translateY(-4px);
+            }
+
+            .trust-inner {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+
+                padding: 18px 0;
+            }
+
+            .trust-item {
+                justify-content: flex-start;
+
+                font-size: 11px;
+            }
+
+            .section-header-row {
+                display: block;
+
+                margin-bottom: 34px;
+            }
+
+            .section-header-row .section-description {
+                margin-top: 18px;
+            }
+
+            .services-grid,
+            .portfolio-grid,
+            .testimonial-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                min-height: 255px;
+            }
+
+            .selection-inner {
+                grid-template-columns: 1fr;
+
+                padding: 16px;
+            }
+
+            .selection-image {
+                min-height: 240px;
+            }
+
+            .selection-content {
+                padding: 8px;
+            }
+
+            .why-grid {
+                gap: 45px;
+            }
+
+            .why-list {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                gap: 40px;
+            }
+
+            .about-visual {
+                min-height: 390px;
+            }
+
+            .process-grid {
+                margin-top: 35px;
+            }
+
+            .portfolio-card {
+                min-height: 350px;
+            }
+
+            .contact-box {
+                padding: 31px 23px;
+                gap: 35px;
+
+                border-radius: 27px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .whatsapp-float {
+                right: 15px;
+                bottom: 15px;
+
+                width: 52px;
+                height: 52px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-field.full {
+                grid-column: auto;
+            }
+
+            .form-footer {
+                align-items: stretch;
+                flex-direction: column-reverse;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-box {
+                max-height: 94svh;
+
+                border-radius: 23px;
+            }
+
+            .modal-body {
+                padding: 17px;
+            }
+
+            .project-image {
+                height: 240px;
+            }
+        }
+
+        @media (max-width: 390px) {
+
+            .brand-name {
+                max-width: 130px;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero h1 {
+                font-size: 47px;
+            }
+
+            .hero-card {
+                padding: 21px;
+            }
+
+            .hero-card-center h3 {
+                font-size: 35px;
+            }
+
+            .trust-item {
+                font-size: 10px;
+            }
+
+            .section-title {
+                font-size: 39px;
+            }
+        }
+
+        /* =========================================================
+           22. REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
+
+    <header id="header">
+
+        <nav class="nav">
+
+            <a
+                href="#inicio"
+                class="brand"
+                aria-label="Inicio"
+            >
+                <div class="brand-logo">
+                    <span id="brandInitial">N</span>
+                </div>
+
+                <span
+                    class="brand-name"
+                    id="brandNameNav"
+                >
+                    NOVA
+                </span>
+            </a>
+
+            <div
+                class="nav-links"
+                id="navLinks"
+            >
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#proceso">Proceso</a>
+                <a href="#portafolio">Portafolio</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+
+            <a
+                href="#contacto"
+                class="nav-cta"
+                id="navCta"
+            >
+                Contactar
+            </a>
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                aria-label="Abrir menú"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+
+        <section
+            class="hero"
+            id="inicio"
+        >
+
+            <div class="container hero-grid">
+
+                <div class="hero-copy">
+
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        <span id="heroEyebrow">
+                            Presencia digital profesional
+                        </span>
+                    </div>
+
+                    <h1 id="heroTitle">
+                        Una mejor forma de
+                        <span>hacer crecer</span>
+                        tu negocio.
+                    </h1>
+
+                    <p
+                        class="hero-text"
+                        id="heroDescription"
+                    >
+                        Soluciones profesionales diseñadas para empresas,
+                        servicios y emprendimientos que buscan crecer,
+                        destacar y conectar con más clientes.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <button
+                            class="button button-primary"
+                            id="heroPrimaryButton"
+                        >
+                            Conocer nuestros servicios
+                            <span>→</span>
+                        </button>
+
+                        <button
+                            class="button button-secondary"
+                            id="heroSecondaryButton"
+                        >
+                            Hablar con nosotros
+                        </button>
+
+                    </div>
+
+                    <div class="hero-proof">
+
+                        <span>Experiencia profesional</span>
+                        <span>Atención personalizada</span>
+                        <span>Soluciones a medida</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="visual-glow"></div>
+
+                    <div class="hero-card">
+
+                        <div class="hero-card-top">
+
+                            <div
+                                class="hero-card-brand"
+                                id="heroCardBrand"
+                            >
+                                NOVA
+                            </div>
+
+                            <div class="hero-card-tag">
+                                BUSINESS
+                            </div>
+
+                        </div>
+
+                        <div class="hero-card-center">
+
+                            <h3 id="heroCardTitle">
+                                Tu empresa.
+                                Una presencia
+                                que importa.
+                            </h3>
+
+                            <p id="heroCardText">
+                                Una experiencia digital creada
+                                para comunicar valor y convertir
+                                visitantes en clientes.
+                            </p>
+
+                        </div>
+
+                        <div class="hero-card-bottom">
+
+                            <div class="hero-card-number">
+                                DIGITAL / 2026
+                            </div>
+
+                            <div class="hero-card-icon">
+                                ↗
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TRUST BAR
+        ====================================================== -->
+
+        <section class="trust-bar">
+
+            <div class="container trust-inner">
+
+                <div class="trust-item">
+                    <span class="trust-icon">✦</span>
+                    Diseño profesional
+                </div>
+
+                <div class="trust-item">
+                    <span class="trust-icon">◈</span>
+                    Experiencia sencilla
+                </div>
+
+                <div class="trust-item">
+                    <span class="trust-icon">↗</span>
+                    Orientado a resultados
+                </div>
+
+                <div class="trust-item">
+                    <span class="trust-icon">✓</span>
+                    Adaptable a tu negocio
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SERVICIOS
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="servicios"
+        >
+
+            <div class="container">
+
+                <div class="section-header-row reveal">
+
+                    <div>
+
+                        <div class="section-label">
+                            Lo que hacemos
+                        </div>
+
+                        <h2 class="section-title">
+                            Soluciones pensadas
+                            para avanzar.
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        Presenta tus servicios de forma clara y permite
+                        que cada visitante descubra rápidamente la solución
+                        adecuada para lo que necesita.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="services-grid"
+                    id="servicesGrid"
+                >
+                    <!-- JS -->
+                </div>
+
+
+                <div
+                    class="selection-panel"
+                    id="selectionPanel"
+                >
+
+                    <div class="selection-inner">
+
+                        <div class="selection-image">
+                            <img
+                                id="selectionImage"
+                                src=""
+                                alt=""
+                            >
+                        </div>
+
+                        <div class="selection-content">
+
+                            <div class="section-label">
+                                Seleccionado
+                            </div>
+
+                            <h3 id="selectionTitle">
+                                Servicio
+                            </h3>
+
+                            <p id="selectionDescription">
+                                Descripción del servicio.
+                            </p>
+
+                            <ul
+                                class="feature-list"
+                                id="selectionFeatures"
+                            >
+                            </ul>
+
+                            <div class="selection-footer">
+
+                                <div
+                                    class="selection-price"
+                                    id="selectionPrice"
+                                >
+                                </div>
+
+                                <button
+                                    class="button button-primary"
+                                    id="selectionButton"
+                                >
+                                    Solicitar información
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WHY US
+        ====================================================== -->
+
+        <section class="section why-section">
+
+            <div class="container why-grid">
+
+                <div class="reveal">
+
+                    <div class="section-label">
+                        Por qué elegirnos
+                    </div>
+
+                    <h2 class="why-title">
+                        Profesionalismo
+                        desde el primer
+                        <span>contacto.</span>
+                    </h2>
+
+                    <p class="section-description">
+                        Una presencia digital debe hacer que tu negocio
+                        se vea tan profesional como realmente es.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="why-list reveal"
+                    id="whyList"
+                >
+                    <!-- JS -->
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             NOSOTROS
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="nosotros"
+        >
+
+            <div class="container about-grid">
+
+                <div class="about-visual reveal">
+
+                    <div class="about-visual-content">
+
+                        <span id="aboutVisualLabel">
+                            Construido para crecer
+                        </span>
+
+                        <h3 id="aboutVisualTitle">
+                            Más que una página.
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="about-copy reveal">
+
+                    <div class="section-label">
+                        Nosotros
+                    </div>
+
+                    <h2 id="aboutTitle">
+                        Una empresa
+                        que entiende
+                        lo que necesitas.
+                    </h2>
+
+                    <p id="aboutDescription">
+                        Somos una empresa enfocada en ofrecer soluciones
+                        profesionales para personas y organizaciones que
+                        buscan mejorar la forma en que presentan y ofrecen
+                        sus productos o servicios.
+                    </p>
+
+                    <div
+                        class="about-points"
+                        id="aboutPoints"
+                    >
+                        <!-- JS -->
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROCESO
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="proceso"
+        >
+
+            <div class="container">
+
+                <div class="reveal">
+
+                    <div class="section-label">
+                        Cómo funciona
+                    </div>
+
+                    <h2 class="section-title">
+                        Simple para ti.
+                        Claro para tus clientes.
+                    </h2>
+
+                    <p class="section-description">
+                        Explica el proceso de trabajo de tu empresa
+                        sin complicaciones.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="process-grid"
+                    id="processGrid"
+                >
+                    <!-- JS -->
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PORTAFOLIO
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="portafolio"
+        >
+
+            <div class="container">
+
+                <div class="reveal">
+
+                    <div class="section-label">
+                        Portafolio
+                    </div>
+
+                    <h2 class="section-title">
+                        Lo que hacemos
+                        habla por nosotros.
+                    </h2>
+
+                    <p class="section-description">
+                        Muestra proyectos, trabajos, productos o casos
+                        relevantes para generar confianza.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="portfolio-grid"
+                    id="portfolioGrid"
+                >
+                    <!-- JS -->
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TESTIMONIOS
+        ====================================================== -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div class="reveal">
+
+                    <div class="section-label">
+                        Experiencias
+                    </div>
+
+                    <h2 class="section-title">
+                        Lo que nuestros
+                        clientes dicen.
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="testimonial-grid"
+                    id="testimonialGrid"
+                >
+                    <!-- JS -->
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CONTACTO
+        ====================================================== -->
+
+        <section
+            class="section contact-section"
+            id="contacto"
+        >
+
+            <div class="container">
+
+                <div class="contact-box reveal">
+
+                    <div>
+
+                        <div class="section-label">
+                            Comencemos
+                        </div>
+
+                        <h2>
+                            ¿Tienes un proyecto
+                            en mente?
+                        </h2>
+
+                        <p id="contactDescription">
+                            Cuéntanos qué necesitas y encontraremos
+                            la mejor forma de ayudarte.
+                        </p>
+
+                        <div class="contact-actions">
+
+                            <button
+                                class="button button-primary"
+                                id="contactWhatsApp"
+                            >
+                                Hablar por WhatsApp
+                                <span>↗</span>
+                            </button>
+
+                            <button
+                                class="button button-secondary"
+                                id="contactRequest"
+                            >
+                                Solicitar información
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="contact-info"
+                        id="contactInfo"
+                    >
+                        <!-- JS -->
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer>
+
+        <div class="container footer-inner">
+
+            <div>
+                © <span id="footerYear"></span>
+                <span id="footerCompany">NOVA</span>.
+                Todos los derechos reservados.
+            </div>
+
+            <div class="footer-links">
+
+                <a href="#inicio">
+                    Inicio
+                </a>
+
+                <a href="#servicios">
+                    Servicios
+                </a>
+
+                <a href="#contacto">
+                    Contacto
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         WHATSAPP
+    ========================================================== -->
+
+    <button
+        class="whatsapp-float"
+        id="whatsappFloat"
+        aria-label="Contactar por WhatsApp"
+        title="Contactar por WhatsApp"
+    >
+        ◉
+    </button>
+
+
+    <!-- =========================================================
+         MODAL — SOLICITUD
+    ========================================================== -->
+
+    <div
+        class="modal"
+        id="requestModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-head">
+
+                <h3>
+                    Solicitar información
+                </h3>
+
+                <button
+                    class="close-modal"
+                    data-close="requestModal"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="request-summary">
+
+                    <small>
+                        Servicio seleccionado
+                    </small>
+
+                    <strong id="requestServiceName">
+                        Información general
+                    </strong>
+
+                </div>
+
+
+                <form id="requestForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+
+                            <label for="clientName">
+                                Nombre
+                            </label>
+
+                            <input
+                                id="clientName"
+                                name="clientName"
+                                type="text"
+                                placeholder="Tu nombre"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="clientPhone">
+                                Teléfono
+                            </label>
+
+                            <input
+                                id="clientPhone"
+                                name="clientPhone"
+                                type="tel"
+                                placeholder="Tu teléfono"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="clientEmail">
+                                Correo electrónico
+                            </label>
+
+                            <input
+                                id="clientEmail"
+                                name="clientEmail"
+                                type="email"
+                                placeholder="correo@ejemplo.com"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="requestQuantity">
+                                Cantidad
+                            </label>
+
+                            <input
+                                id="requestQuantity"
+                                name="requestQuantity"
+                                type="number"
+                                min="1"
+                                value="1"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field full">
+
+                            <label for="requestDetails">
+                                ¿Qué necesitas?
+                            </label>
+
+                            <textarea
+                                id="requestDetails"
+                                name="requestDetails"
+                                placeholder="Cuéntanos brevemente qué necesitas..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-footer">
+
+                        <div class="form-note">
+                            Al enviar se generará una solicitud
+                            para revisarla antes de contactar.
+                        </div>
+
+                        <button
+                            class="button button-primary"
+                            type="submit"
+                        >
+                            Revisar solicitud
+                            <span>→</span>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MODAL — TICKET
+    ========================================================== -->
+
+    <div
+        class="modal"
+        id="ticketModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-head">
+
+                <h3>
+                    Revisa tu solicitud
+                </h3>
+
+                <button
+                    class="close-modal"
+                    data-close="ticketModal"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="ticket">
+
+                    <div class="ticket-head">
+
+                        <small>
+                            Solicitud
+                        </small>
+
+                        <h3 id="ticketCompany">
+                            NOVA
+                        </h3>
+
+                        <div
+                            class="ticket-id"
+                            id="ticketId"
+                        >
+                            #SOL-000000
+                        </div>
+
+                    </div>
+
+
+                    <div class="ticket-body">
+
+                        <div class="ticket-row">
+                            <span>Cliente</span>
+                            <strong id="ticketClient">—</strong>
+                        </div>
+
+                        <div class="ticket-row">
+                            <span>Servicio</span>
+                            <strong id="ticketService">—</strong>
+                        </div>
+
+                        <div class="ticket-row">
+                            <span>Cantidad</span>
+                            <strong id="ticketQuantity">—</strong>
+                        </div>
+
+                        <div class="ticket-row">
+                            <span>Teléfono</span>
+                            <strong id="ticketPhone">—</strong>
+                        </div>
+
+                        <div class="ticket-row">
+                            <span>Correo</span>
+                            <strong id="ticketEmail">—</strong>
+                        </div>
+
+                        <div class="ticket-row">
+                            <span>Detalles</span>
+                            <strong id="ticketDetails">—</strong>
+                        </div>
+
+                        <div class="ticket-row">
+                            <span>Fecha</span>
+                            <strong id="ticketDate">—</strong>
+                        </div>
+
+
+                        <div class="ticket-warning">
+                            Esta solicitud no representa una compra,
+                            reserva o contratación confirmada. El negocio
+                            deberá revisar y confirmar los detalles.
+                        </div>
+
+
+                        <button
+                            class="button button-primary"
+                            id="sendTicketWhatsApp"
+                            style="width:100%;margin-top:18px;"
+                        >
+                            Enviar solicitud por WhatsApp
+                            <span>↗</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MODAL — PORTAFOLIO
+    ========================================================== -->
+
+    <div
+        class="modal"
+        id="projectModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-head">
+
+                <h3>
+                    Proyecto
+                </h3>
+
+                <button
+                    class="close-modal"
+                    data-close="projectModal"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="project-image">
+
+                    <img
+                        id="projectImage"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+                <div class="project-info">
+
+                    <div
+                        class="project-tag"
+                        id="projectCategory"
+                    >
+                        Proyecto
+                    </div>
+
+                    <h3 id="projectTitle">
+                        Proyecto
+                    </h3>
+
+                    <p id="projectDescription">
+                        Descripción.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* =========================================================
+           01. CONFIGURACIÓN PRINCIPAL
+
+           AQUÍ PUEDES CAMBIAR LA INFORMACIÓN GENERAL DEL NEGOCIO.
+        ========================================================== */
+
+        const SITE_CONFIG = {
+
+            company: {
+                name: "NOVA",
+                shortName: "N",
+                eyebrow: "Presencia digital profesional",
+
+                title:
+                    "Una mejor forma de hacer crecer tu negocio.",
+
+                description:
+                    "Soluciones profesionales diseñadas para empresas, servicios y emprendimientos que buscan crecer, destacar y conectar con más clientes.",
+
+                primaryAction:
+                    "Conocer nuestros servicios",
+
+                secondaryAction:
+                    "Hablar con nosotros"
+            },
+
+
+            /*
+             * WHATSAPP
+             *
+             * IMPORTANTE:
+             * Coloca aquí únicamente números.
+             *
+             * Ejemplo México:
+             * "525512345678"
+             */
+
+            whatsapp: "525512345678",
+
+
+            contact: {
+
+                phone:
+                    "+52 55 1234 5678",
+
+                email:
+                    "hola@empresa.com",
+
+                address:
+                    "Ciudad de México, México",
+
+                hours:
+                    "Lunes a viernes · 9:00 — 18:00",
+
+                social: {
+                    instagram: "#",
+                    facebook: "#",
+                    tiktok: "#"
+                }
+
+            },
+
+
+            /*
+             * COLOR PRINCIPAL
+             *
+             * Cambia únicamente estos valores si quieres
+             * cambiar la identidad visual.
+             */
+
+            colors: {
+                accent: "#0071e3",
+                accentDark: "#005bb5"
+            }
+
+        };
+
+
+        /* =========================================================
+           02. SERVICIOS
+
+           Puedes agregar, quitar o modificar servicios.
+        ========================================================== */
+
+        const SERVICES = [
+
+            {
+                id: "estrategia",
+
+                icon: "✦",
+
+                name:
+                    "Estrategia y consultoría",
+
+                description:
+                    "Orientación profesional para definir objetivos, oportunidades y próximos pasos.",
+
+                fullDescription:
+                    "Una solución pensada para negocios que necesitan claridad para tomar decisiones y avanzar con una estrategia estructurada.",
+
+                price:
+                    "Consultar",
+
+                image:
+                    "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
+
+                features: [
+                    "Análisis de necesidades",
+                    "Recomendaciones personalizadas",
+                    "Plan de acción",
+                    "Acompañamiento profesional"
+                ]
+            },
+
+
+            {
+                id: "servicio",
+
+                icon: "◈",
+
+                name:
+                    "Servicio profesional",
+
+                description:
+                    "Una solución especializada adaptada a las necesidades específicas de cada cliente.",
+
+                fullDescription:
+                    "Presenta aquí el principal servicio de tu empresa y explica de manera sencilla qué problema resuelve y qué obtiene el cliente.",
+
+                price:
+                    "Desde $1,500",
+
+                image:
+                    "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=85",
+
+                features: [
+                    "Atención personalizada",
+                    "Proceso claro",
+                    "Solución adaptada",
+                    "Seguimiento"
+                ]
+            },
+
+
+            {
+                id: "solucion",
+
+                icon: "↗",
+
+                name:
+                    "Soluciones a medida",
+
+                description:
+                    "Creamos propuestas adaptadas al proyecto, presupuesto y objetivos de cada cliente.",
+
+                fullDescription:
+                    "Ideal para proyectos que requieren una propuesta personalizada en lugar de un servicio estándar.",
+
+                price:
+                    "Cotización personalizada",
+
+                image:
+                    "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=85",
+
+                features: [
+                    "Diagnóstico inicial",
+                    "Propuesta personalizada",
+                    "Alcance definido",
+                    "Acompañamiento"
+                ]
+            },
+
+
+            {
+                id: "premium",
+
+                icon: "◆",
+
+                name:
+                    "Experiencia premium",
+
+                description:
+                    "Una propuesta integral para negocios que buscan una solución de alto nivel.",
+
+                fullDescription:
+                    "Combina diferentes soluciones en una experiencia integral diseñada para empresas que buscan una presencia más sólida.",
+
+                price:
+                    "Consultar",
+
+                image:
+                    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
+
+                features: [
+                    "Atención prioritaria",
+                    "Solución integral",
+                    "Personalización",
+                    "Seguimiento"
+                ]
+            },
+
+
+            {
+                id: "producto",
+
+                icon: "◇",
+
+                name:
+                    "Productos",
+
+                description:
+                    "Presenta productos destacados de tu negocio de forma clara y atractiva.",
+
+                fullDescription:
+                    "Utiliza esta sección para mostrar productos, paquetes o soluciones que el cliente pueda seleccionar.",
+
+                price:
+                    "Consultar",
+
+                image:
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85",
+
+                features: [
+                    "Información clara",
+                    "Características",
+                    "Opciones disponibles",
+                    "Solicitud directa"
+                ]
+            },
+
+
+            {
+                id: "soporte",
+
+                icon: "✓",
+
+                name:
+                    "Soporte y atención",
+
+                description:
+                    "Acompañamiento para resolver dudas y ayudar al cliente durante el proceso.",
+
+                fullDescription:
+                    "Una opción para empresas que necesitan mantener una relación cercana con sus clientes después de contratar.",
+
+                price:
+                    "Consultar",
+
+                image:
+                    "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85",
+
+                features: [
+                    "Atención directa",
+                    "Resolución de dudas",
+                    "Seguimiento",
+                    "Comunicación sencilla"
+                ]
+            }
+
+        ];
+
+
+        /* =========================================================
+           03. POR QUÉ ELEGIRNOS
+        ========================================================== */
+
+        const WHY_US = [
+
+            {
+                icon: "✦",
+                title: "Experiencia",
+                text:
+                    "Un proceso pensado para ofrecer claridad y profesionalismo."
+            },
+
+            {
+                icon: "◎",
+                title: "Atención personalizada",
+                text:
+                    "Cada cliente puede recibir una solución adaptada a sus necesidades."
+            },
+
+            {
+                icon: "↗",
+                title: "Enfoque en resultados",
+                text:
+                    "Las soluciones se presentan de forma clara y orientada a objetivos."
+            },
+
+            {
+                icon: "◇",
+                title: "Tecnología",
+                text:
+                    "Herramientas y experiencias digitales diseñadas para negocios modernos."
+            }
+
+        ];
+
+
+        /* =========================================================
+           04. NOSOTROS
+        ========================================================== */
+
+        const ABOUT = {
+
+            visualLabel:
+                "Construido para crecer",
+
+            visualTitle:
+                "Más que una página.",
+
+            title:
+                "Una empresa que entiende lo que necesitas.",
+
+            description:
+                "Somos una empresa enfocada en ofrecer soluciones profesionales para personas y organizaciones que buscan mejorar la forma en que presentan y ofrecen sus productos o servicios.",
+
+            points: [
+
+                {
+                    title: "Claridad",
+                    text:
+                        "Información fácil de entender."
+                },
+
+                {
+                    title: "Profesionalismo",
+                    text:
+                        "Una experiencia coherente con tu marca."
+                },
+
+                {
+                    title: "Flexibilidad",
+                    text:
+                        "Soluciones que pueden adaptarse a diferentes necesidades."
+                }
+
+            ]
+
+        };
+
+
+        /* =========================================================
+           05. PROCESO
+        ========================================================== */
+
+        const PROCESS = [
+
+            {
+                number: "01",
+                title: "Cuéntanos qué necesitas",
+                text:
+                    "Conocemos tu objetivo, necesidad o proyecto."
+            },
+
+            {
+                number: "02",
+                title: "Analizamos tu solicitud",
+                text:
+                    "Revisamos la información para entender qué solución puede funcionar mejor."
+            },
+
+            {
+                number: "03",
+                title: "Presentamos una solución",
+                text:
+                    "Definimos una propuesta clara y adaptada al proyecto."
+            },
+
+            {
+                number: "04",
+                title: "Comenzamos",
+                text:
+                    "Una vez acordados los detalles, damos el siguiente paso."
+            }
+
+        ];
+
+
+        /* =========================================================
+           06. PORTAFOLIO
+
+           Sustituye las imágenes por trabajos reales cuando
+           tengas material propio.
+        ========================================================== */
+
+        const PORTFOLIO = [
+
+            {
+                title: "Proyecto corporativo",
+                category: "Empresa",
+                description:
+                    "Ejemplo editable para mostrar una presencia digital empresarial.",
+                image:
+                    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=85"
+            },
+
+            {
+                title: "Marca moderna",
+                category: "Branding",
+                description:
+                    "Ejemplo de presentación visual para una marca contemporánea.",
+                image:
+                    "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1400&q=85"
+            },
+
+            {
+                title: "Experiencia digital",
+                category: "Digital",
+                description:
+                    "Ejemplo de experiencia diseñada para facilitar el contacto con clientes.",
+                image:
+                    "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1400&q=85"
+            }
+
+        ];
+
+
+        /* =========================================================
+           07. TESTIMONIOS
+
+           SON DATOS DE EJEMPLO.
+           REEMPLAZAR POR TESTIMONIOS REALES.
+        ========================================================== */
+
+        const TESTIMONIALS = [
+
+            {
+                name: "Cliente de ejemplo",
+                service: "Servicio profesional",
+                comment:
+                    "Ejemplo editable de un testimonio. Sustituye este texto por una experiencia real de un cliente.",
+                rating: 5
+            },
+
+            {
+                name: "Cliente de ejemplo",
+                service: "Consultoría",
+                comment:
+                    "Ejemplo editable para mostrar cómo podría verse una recomendación de un cliente.",
+                rating: 5
+            },
+
+            {
+                name: "Cliente de ejemplo",
+                service: "Solución personalizada",
+                comment:
+                    "Utiliza esta sección para destacar comentarios reales y generar confianza.",
+                rating: 5
+            }
+
+        ];
+
+
+        /* =========================================================
+           08. APLICAR CONFIGURACIÓN
+        ========================================================== */
+
+        document.documentElement.style.setProperty(
+            "--accent",
+            SITE_CONFIG.colors.accent
+        );
+
+        document.documentElement.style.setProperty(
+            "--accent-dark",
+            SITE_CONFIG.colors.accentDark
+        );
+
+
+        document.title =
+            SITE_CONFIG.company.name +
+            " — Presencia digital profesional";
+
+
+        document.getElementById("brandNameNav").textContent =
+            SITE_CONFIG.company.name;
+
+        document.getElementById("brandInitial").textContent =
+            SITE_CONFIG.company.shortName;
+
+        document.getElementById("heroEyebrow").textContent =
+            SITE_CONFIG.company.eyebrow;
+
+        document.getElementById("heroTitle").innerHTML =
+            SITE_CONFIG.company.title
+                .replace(
+                    "hacer crecer",
+                    "<span>hacer crecer</span>"
+                );
+
+        document.getElementById("heroDescription").textContent =
+            SITE_CONFIG.company.description;
+
+        document.getElementById("heroPrimaryButton").innerHTML =
+            SITE_CONFIG.company.primaryAction +
+            " <span>→</span>";
+
+        document.getElementById("heroSecondaryButton").textContent =
+            SITE_CONFIG.company.secondaryAction;
+
+        document.getElementById("heroCardBrand").textContent =
+            SITE_CONFIG.company.name;
+
+        document.getElementById("footerCompany").textContent =
+            SITE_CONFIG.company.name;
+
+        document.getElementById("ticketCompany").textContent =
+            SITE_CONFIG.company.name;
+
+        document.getElementById("aboutVisualLabel").textContent =
+            ABOUT.visualLabel;
+
+        document.getElementById("aboutVisualTitle").textContent =
+            ABOUT.visualTitle;
+
+        document.getElementById("aboutTitle").textContent =
+            ABOUT.title;
+
+        document.getElementById("aboutDescription").textContent =
+            ABOUT.description;
+
+        document.getElementById("footerYear").textContent =
+            new Date().getFullYear();
+
+
+        /* =========================================================
+           09. RENDER SERVICES
+        ========================================================== */
+
+        const servicesGrid =
+            document.getElementById("servicesGrid");
+
+        function renderServices() {
+
+            servicesGrid.innerHTML =
+                SERVICES.map(service => `
+
+                    <article
+                        class="service-card reveal"
+                        data-service="${service.id}"
+                    >
+
+                        <div class="service-icon">
+                            ${service.icon}
+                        </div>
+
+                        <h3>
+                            ${service.name}
+                        </h3>
+
+                        <p>
+                            ${service.description}
+                        </p>
+
+                        <div class="service-bottom">
+
+                            <span class="service-price">
+                                ${service.price}
+                            </span>
+
+                            <span class="service-action">
+                                Ver detalles →
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                `).join("");
+
+            document
+                .querySelectorAll(".service-card")
+                .forEach(card => {
+
+                    card.addEventListener(
+                        "click",
+                        () => {
+
+                            const id =
+                                card.dataset.service;
+
+                            selectService(id);
+
+                        }
+                    );
+
+                });
+
+            observeReveals();
+
+        }
+
+
+        /* =========================================================
+           10. SELECT SERVICE
+        ========================================================== */
+
+        let selectedService = null;
+
+        const selectionPanel =
+            document.getElementById("selectionPanel");
+
+        function selectService(id) {
+
+            const service =
+                SERVICES.find(item => item.id === id);
+
+            if (!service) return;
+
+            selectedService = service;
+
+            document
+                .querySelectorAll(".service-card")
+                .forEach(card => {
+
+                    card.classList.toggle(
+                        "selected",
+                        card.dataset.service === id
+                    );
+
+                });
+
+            document.getElementById(
+                "selectionImage"
+            ).src = service.image;
+
+            document.getElementById(
+                "selectionImage"
+            ).alt = service.name;
+
+            document.getElementById(
+                "selectionTitle"
+            ).textContent = service.name;
+
+            document.getElementById(
+                "selectionDescription"
+            ).textContent =
+                service.fullDescription;
+
+            document.getElementById(
+                "selectionPrice"
+            ).innerHTML = `
+                <small>Inversión</small>
+                ${service.price}
+            `;
+
+            document.getElementById(
+                "selectionFeatures"
+            ).innerHTML =
+                service.features
+                    .map(feature => `
+                        <li>${feature}</li>
+                    `)
+                    .join("");
+
+            selectionPanel.classList.add("active");
+
+            setTimeout(() => {
+
+                selectionPanel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+
+            }, 80);
+
+        }
+
+
+        /* =========================================================
+           11. WHY US
+        ========================================================== */
+
+        document.getElementById("whyList").innerHTML =
+            WHY_US.map(item => `
+
+                <article class="why-card">
+
+                    <div class="why-card-icon">
+                        ${item.icon}
+                    </div>
+
+                    <h3>
+                        ${item.title}
+                    </h3>
+
+                    <p>
+                        ${item.text}
+                    </p>
+
+                </article>
+
+            `).join("");
+
+
+        /* =========================================================
+           12. ABOUT POINTS
+        ========================================================== */
+
+        document.getElementById("aboutPoints").innerHTML =
+            ABOUT.points.map(item => `
+
+                <div class="about-point">
+
+                    <div class="about-point-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${item.title}
+                        </strong>
+
+                        <span>
+                            ${item.text}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+
+        /* =========================================================
+           13. PROCESS
+        ========================================================== */
+
+        document.getElementById("processGrid").innerHTML =
+            PROCESS.map(step => `
+
+                <article class="process-card reveal">
+
+                    <div class="process-number">
+                        ${step.number}
+                    </div>
+
+                    <h3>
+                        ${step.title}
+                    </h3>
+
+                    <p>
+                        ${step.text}
+                    </p>
+
+                </article>
+
+            `).join("");
+
+
+        /* =========================================================
+           14. PORTFOLIO
+        ========================================================== */
+
+        document.getElementById("portfolioGrid").innerHTML =
+            PORTFOLIO.map(
+                (project, index) => `
+
+                    <article
+                        class="portfolio-card reveal"
+                        data-project="${index}"
+                    >
+
+                        <img
+                            src="${project.image}"
+                            alt="${project.title}"
+                            loading="lazy"
+                        >
+
+                        <div class="portfolio-overlay">
+
+                            <span class="portfolio-category">
+                                ${project.category}
+                            </span>
+
+                            <h3>
+                                ${project.title}
+                            </h3>
+
+                            <p>
+                                Ver proyecto →
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                `
+            ).join("");
+
+
+        document
+            .querySelectorAll(".portfolio-card")
+            .forEach(card => {
+
+                card.addEventListener(
+                    "click",
+                    () => {
+
+                        const project =
+                            PORTFOLIO[
+                                Number(card.dataset.project)
+                            ];
+
+                        openProject(project);
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================================
+           15. TESTIMONIALS
+        ========================================================== */
+
+        document.getElementById("testimonialGrid").innerHTML =
+            TESTIMONIALS.map(item => {
+
+                const stars =
+                    "★".repeat(
+                        Math.min(
+                            5,
+                            Math.max(
+                                0,
+                                Number(item.rating) || 0
+                            )
+                        )
+                    );
+
+                const initials =
+                    item.name
+                        .split(" ")
+                        .map(word => word[0])
+                        .slice(0, 2)
+                        .join("")
+                        .toUpperCase();
+
+                return `
+
+                    <article class="testimonial reveal">
+
+                        <div class="stars">
+                            ${stars}
+                        </div>
+
+                        <blockquote>
+                            “${item.comment}”
+                        </blockquote>
+
+                        <div class="testimonial-user">
+
+                            <div class="avatar">
+                                ${initials}
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    ${item.name}
+                                </strong>
+
+                                <span>
+                                    ${item.service}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }).join("");
+
+
+        /* =========================================================
+           16. CONTACT INFO
+        ========================================================== */
+
+        const contactInfo =
+            document.getElementById("contactInfo");
+
+        contactInfo.innerHTML = `
+
+            <a
+                class="contact-item"
+                href="tel:${SITE_CONFIG.contact.phone}"
+            >
+
+                <small>Teléfono</small>
+
+                <strong>
+                    ${SITE_CONFIG.contact.phone}
+                </strong>
+
+            </a>
+
+
+            <a
+                class="contact-item"
+                href="mailto:${SITE_CONFIG.contact.email}"
+            >
+
+                <small>Correo</small>
+
+                <strong>
+                    ${SITE_CONFIG.contact.email}
+                </strong>
+
+            </a>
+
+
+            <div class="contact-item">
+
+                <small>Ubicación</small>
+
+                <strong>
+                    ${SITE_CONFIG.contact.address}
+                </strong>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <small>Horario</small>
+
+                <strong>
+                    ${SITE_CONFIG.contact.hours}
+                </strong>
+
+            </div>
+
+        `;
+
+
+        /* =========================================================
+           17. MENU MÓVIL
+        ========================================================== */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+        menuButton.addEventListener(
+            "click",
+            () => {
+
+                const open =
+                    navLinks.classList.toggle("open");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    open
+                );
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        navLinks.classList.remove("open");
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================================
+           18. HEADER SCROLL
+        ========================================================== */
+
+        const header =
+            document.getElementById("header");
+
+        function updateHeader() {
+
+            header.classList.toggle(
+                "scrolled",
+                window.scrollY > 20
+            );
+
+        }
+
+        window.addEventListener(
+            "scroll",
+            updateHeader,
+            { passive: true }
+        );
+
+        updateHeader();
+
+
+        /* =========================================================
+           19. REVEAL ON SCROLL
+        ========================================================== */
+
+        let revealObserver = null;
+
+        function observeReveals() {
+
+            if (!("IntersectionObserver" in window)) {
+
+                document
+                    .querySelectorAll(".reveal")
+                    .forEach(el =>
+                        el.classList.add("visible")
+                    );
+
+                return;
+
+            }
+
+            if (!revealObserver) {
+
+                revealObserver =
+                    new IntersectionObserver(
+                        entries => {
+
+                            entries.forEach(entry => {
+
+                                if (entry.isIntersecting) {
+
+                                    entry.target
+                                        .classList
+                                        .add("visible");
+
+                                    revealObserver
+                                        .unobserve(
+                                            entry.target
+                                        );
+
+                                }
+
+                            });
+
+                        },
+                        {
+                            threshold: .12,
+                            rootMargin: "0px 0px -30px"
+                        }
+                    );
+
+            }
+
+            document
+                .querySelectorAll(
+                    ".reveal:not(.visible)"
+                )
+                .forEach(el => {
+
+                    revealObserver.observe(el);
+
+                });
+
+        }
+
+        observeReveals();
+
+
+        /* =========================================================
+           20. HERO BUTTONS
+        ========================================================== */
+
+        document
+            .getElementById("heroPrimaryButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .getElementById("servicios")
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                }
+            );
+
+
+        document
+            .getElementById("heroSecondaryButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    openRequestModal();
+
+                }
+            );
+
+
+        /* =========================================================
+           21. SELECTION ACTION
+        ========================================================== */
+
+        document
+            .getElementById("selectionButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    openRequestModal(
+                        selectedService
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           22. MODAL HELPERS
+        ========================================================== */
+
+        function openModal(id) {
+
+            const modal =
+                document.getElementById(id);
+
+            if (!modal) return;
+
+            modal.classList.add("active");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+        }
+
+
+        function closeModal(id) {
+
+            const modal =
+                document.getElementById(id);
+
+            if (!modal) return;
+
+            modal.classList.remove("active");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            if (
+                !document.querySelector(
+                    ".modal.active"
+                )
+            ) {
+
+                document.body.classList.remove(
+                    "modal-open"
+                );
+
+            }
+
+        }
+
+
+        document
+            .querySelectorAll("[data-close]")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        closeModal(
+                            button.dataset.close
+                        );
+
+                    }
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(".modal")
+            .forEach(modal => {
+
+                modal.addEventListener(
+                    "click",
+                    event => {
+
+                        if (
+                            event.target === modal
+                        ) {
+
+                            closeModal(
+                                modal.id
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (event.key !== "Escape") {
+                    return;
+                }
+
+                document
+                    .querySelectorAll(".modal.active")
+                    .forEach(modal =>
+                        closeModal(modal.id)
+                    );
+
+            }
+        );
+
+
+        /* =========================================================
+           23. REQUEST MODAL
+        ========================================================== */
+
+        function openRequestModal(service = null) {
+
+            const selected =
+                service ||
+                selectedService;
+
+            document.getElementById(
+                "requestServiceName"
+            ).textContent =
+                selected
+                    ? selected.name
+                    : "Información general";
+
+            openModal("requestModal");
+
+            setTimeout(
+                () =>
+                    document
+                        .getElementById("clientName")
+                        .focus(),
+                300
+            );
+
+        }
+
+
+        document
+            .getElementById("contactRequest")
+            .addEventListener(
+                "click",
+                () => openRequestModal()
+            );
+
+
+        /* =========================================================
+           24. GENERAR ID DE SOLICITUD
+        ========================================================== */
+
+        function generateRequestId() {
+
+            const now =
+                new Date();
+
+            const date =
+                now
+                    .toISOString()
+                    .replace(/\D/g, "")
+                    .slice(0, 12);
+
+            const random =
+                Math.floor(
+                    1000 +
+                    Math.random() * 9000
+                );
+
+            return `#SOL-${date}-${random}`;
+
+        }
+
+
+        /* =========================================================
+           25. FECHA
+        ========================================================== */
+
+        function formattedDate() {
+
+            return new Intl.DateTimeFormat(
+                "es-MX",
+                {
+                    dateStyle: "long",
+                    timeStyle: "short"
+                }
+            ).format(
+                new Date()
+            );
+
+        }
+
+
+        /* =========================================================
+           26. FORMULARIO → TICKET
+        ========================================================== */
+
+        let currentRequest = null;
+
+        document
+            .getElementById("requestForm")
+            .addEventListener(
+                "submit",
+                event => {
+
+                    event.preventDefault();
+
+                    const form =
+                        event.currentTarget;
+
+                    const formData =
+                        new FormData(form);
+
+                    currentRequest = {
+
+                        id:
+                            generateRequestId(),
+
+                        company:
+                            SITE_CONFIG.company.name,
+
+                        client:
+                            String(
+                                formData.get(
+                                    "clientName"
+                                ) || ""
+                            ).trim(),
+
+                        phone:
+                            String(
+                                formData.get(
+                                    "clientPhone"
+                                ) || ""
+                            ).trim(),
+
+                        email:
+                            String(
+                                formData.get(
+                                    "clientEmail"
+                                ) || ""
+                            ).trim(),
+
+                        service:
+                            selectedService
+                                ? selectedService.name
+                                : "Información general",
+
+                        quantity:
+                            String(
+                                formData.get(
+                                    "requestQuantity"
+                                ) || "1"
+                            ),
+
+                        details:
+                            String(
+                                formData.get(
+                                    "requestDetails"
+                                ) || ""
+                            ).trim(),
+
+                        date:
+                            formattedDate()
+
+                    };
+
+
+                    renderTicket(
+                        currentRequest
+                    );
+
+                    closeModal(
+                        "requestModal"
+                    );
+
+                    openModal(
+                        "ticketModal"
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           27. RENDER TICKET
+        ========================================================== */
+
+        function renderTicket(data) {
+
+            document.getElementById(
+                "ticketId"
+            ).textContent =
+                data.id;
+
+            document.getElementById(
+                "ticketClient"
+            ).textContent =
+                data.client || "No especificado";
+
+            document.getElementById(
+                "ticketService"
+            ).textContent =
+                data.service;
+
+            document.getElementById(
+                "ticketQuantity"
+            ).textContent =
+                data.quantity;
+
+            document.getElementById(
+                "ticketPhone"
+            ).textContent =
+                data.phone || "No especificado";
+
+            document.getElementById(
+                "ticketEmail"
+            ).textContent =
+                data.email || "No especificado";
+
+            document.getElementById(
+                "ticketDetails"
+            ).textContent =
+                data.details || "Sin detalles adicionales";
+
+            document.getElementById(
+                "ticketDate"
+            ).textContent =
+                data.date;
+
+        }
+
+
+        /* =========================================================
+           28. WHATSAPP
+
+           El número se controla desde SITE_CONFIG.whatsapp.
+        ========================================================== */
+
+        function openWhatsApp(message) {
+
+            const phone =
+                String(
+                    SITE_CONFIG.whatsapp
+                ).replace(/\D/g, "");
+
+            if (!phone) {
+
+                alert(
+                    "Configura primero el número de WhatsApp en SITE_CONFIG."
+                );
+
+                return;
+
+            }
+
+            const url =
+                "https://wa.me/" +
+                phone +
+                "?text=" +
+                encodeURIComponent(message);
+
+            window.open(
+                url,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        }
+
+
+        function buildGeneralWhatsAppMessage() {
+
+            return (
+                `Hola, me interesa conocer más sobre ${SITE_CONFIG.company.name}.\n\n` +
+                `Me gustaría recibir información sobre sus servicios.`
+            );
+
+        }
+
+
+        function buildServiceWhatsAppMessage(service) {
+
+            return (
+                `Hola, me interesa conocer más sobre sus servicios.\n\n` +
+                `Servicio de interés: ${service.name}\n\n` +
+                `Me gustaría recibir más información.`
+            );
+
+        }
+
+
+        document
+            .getElementById("whatsappFloat")
+            .addEventListener(
+                "click",
+                () => {
+
+                    openWhatsApp(
+                        buildGeneralWhatsAppMessage()
+                    );
+
+                }
+            );
+
+
+        document
+            .getElementById("contactWhatsApp")
+            .addEventListener(
+                "click",
+                () => {
+
+                    openWhatsApp(
+                        selectedService
+                            ? buildServiceWhatsAppMessage(
+                                selectedService
+                            )
+                            : buildGeneralWhatsAppMessage()
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           29. TICKET → WHATSAPP
+        ========================================================== */
+
+        document
+            .getElementById("sendTicketWhatsApp")
+            .addEventListener(
+                "click",
+                () => {
+
+                    if (!currentRequest) {
+                        return;
+                    }
+
+                    const data =
+                        currentRequest;
+
+                    const message =
+                        [
+                            `Hola, quiero enviar una solicitud a ${data.company}.`,
+                            ``,
+                            `SOLICITUD ${data.id}`,
+                            ``,
+                            `Cliente: ${data.client || "No especificado"}`,
+                            `Servicio / Producto: ${data.service}`,
+                            `Cantidad: ${data.quantity}`,
+                            `Teléfono: ${data.phone || "No especificado"}`,
+                            `Correo: ${data.email || "No especificado"}`,
+                            `Detalles: ${data.details || "Sin detalles adicionales"}`,
+                            `Fecha: ${data.date}`,
+                            ``,
+                            `Esta solicitud queda sujeta a revisión y confirmación por parte del negocio.`
+                        ].join("\n");
+
+                    openWhatsApp(
+                        message
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           30. PROYECTOS
+        ========================================================== */
+
+        function openProject(project) {
+
+            document.getElementById(
+                "projectImage"
+            ).src =
+                project.image;
+
+            document.getElementById(
+                "projectImage"
+            ).alt =
+                project.title;
+
+            document.getElementById(
+                "projectCategory"
+            ).textContent =
+                project.category;
+
+            document.getElementById(
+                "projectTitle"
+            ).textContent =
+                project.title;
+
+            document.getElementById(
+                "projectDescription"
+            ).textContent =
+                project.description;
+
+            openModal(
+                "projectModal"
+            );
+
+        }
+
+
+        /* =========================================================
+           31. INICIALIZACIÓN
+        ========================================================== */
+
+        renderServices();
+
+        observeReveals();
+
+
+        /* =========================================================
+           32. CARGA DE IMÁGENES
+
+           Si una imagen externa falla, se reemplaza por un fondo
+           neutro para evitar elementos rotos.
+        ========================================================== */
+
+        document.addEventListener(
+            "error",
+            event => {
+
+                if (
+                    event.target.tagName === "IMG"
+                ) {
+
+                    event.target.style.background =
+                        "linear-gradient(145deg,#ddd,#aaa)";
+
+                    event.target.removeAttribute(
+                        "src"
+                    );
+
+                }
+
+            },
+            true
+        );
+
+    </script>
+
+</body>
+</html>
